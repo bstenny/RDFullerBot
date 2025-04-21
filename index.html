@@ -70,21 +70,14 @@
       .card__content p  { font-size: 1rem; }
     }
 
-    /* === Messenger window styling === */
+    /* === Hide any custom messenger sizing so only bubble shows === */
     df-messenger {
-      --df-messenger-font-family: 'Poppins', sans-serif;
-      --df-messenger-font-color: #1f2937;
-      --df-messenger-chat-background: #ffffff;
-      --df-messenger-message-user-background: #dbeafe;
-      --df-messenger-message-bot-background: #f9fafb;
-      position: fixed;
+      /* remove any forced width/height */
+      position: fixed !important;
       bottom: 16px;
       right: 16px;
-      width: 340px;
-      height: 500px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
-      border-radius: 8px;
-      z-index: 999;
+      width: auto !important;
+      height: auto !important;
     }
   </style>
 </head>
