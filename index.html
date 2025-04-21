@@ -3,97 +3,100 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>RD Fuller Support</title>
+  <title>RD Fuller Support</title>
+
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
 
+  <!-- Dialogflow Messenger theme -->
+  <link rel="stylesheet"
+        href="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/themes/df-messenger-default.css"/>
+
   <style>
-    /* Reset & base */
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: 'Poppins', sans-serif;
-      color: #1f2937;
-      background: #f3f4f6;
-      line-height: 1.6;
+    /* =====  Base / reset  ===== */
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:'Poppins',sans-serif;
+      color:#1f2937;
+      background:#f3f4f6;
+      line-height:1.6;
     }
 
-    /* Hero / Landing section */
-    .hero {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      text-align: center;
-      padding: 2rem;
+    /* =====  Hero section  ===== */
+    .hero{
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      min-height:100vh;
+      padding:2rem;
     }
-    .hero h1 {
-      font-size: 3rem;
-      font-weight: 600;
-      margin-bottom: 1rem;
-      color: #111827;
+    .hero h1{
+      font-size:3rem;
+      font-weight:600;
+      color:#111827;
+      margin-bottom:1rem;
     }
-    .hero p {
-      font-size: 1.25rem;
-      max-width: 600px;
-      margin-bottom: 2rem;
-      color: #4b5563;
+    .hero p{
+      font-size:1.25rem;
+      max-width:600px;
+      color:#4b5563;
+      margin-bottom:2rem;
     }
-    .cta {
-      display: inline-block;
-      font-weight: 600;
-      font-size: 1rem;
-      color: #fff;
-      background: #3b82f6;
-      padding: 0.75rem 1.5rem;
-      border-radius: 0.5rem;
-      text-decoration: none;
-      transition: background 0.3s;
+    .cta{
+      display:inline-block;
+      font-weight:600;
+      font-size:1rem;
+      color:#fff;
+      background:#3b82f6;
+      padding:.75rem 1.5rem;
+      border-radius:.5rem;
+      text-decoration:none;
+      transition:background .25s;
     }
-    .cta:hover {
-      background: #2563eb;
-    }
-    @media (max-width: 768px) {
-      .hero h1 { font-size: 2.25rem; }
-      .hero p  { font-size: 1rem; }
+    .cta:hover{background:#2563eb}
+
+    @media(max-width:768px){
+      .hero h1{font-size:2.25rem}
+      .hero p {font-size:1rem}
     }
 
-    /* Hide the default floating bubble */
-    df-messenger::part(chat-bubble) {
-      display: none !important;
-    }
-
-    /* Container for the messenger: hidden until opened */
-    #dfMessenger {
-      display: none;                    /* start hidden */
-      position: fixed !important;
-      bottom: 16px;
-      right: 16px;
-      width: 350px;
-      height: 500px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-      border-radius: 8px;
-      overflow: hidden;
-      z-index: 999;
+    /* =====  Messenger window tweaks  ===== */
+    df-messenger{
+      --df-messenger-font-family:Poppins,sans-serif;
+      --df-messenger-font-color:#111827;
+      --df-messenger-chat-background:#ffffff;
+      --df-messenger-message-user-background:#dbeafe;
+      --df-messenger-message-bot-background:#f9fafb;
+      /* window size */
+      position:fixed;
+      bottom:16px;
+      right:16px;
+      width:340px;
+      height:500px;
+      box-shadow:0 4px 16px rgba(0,0,0,.12);
+      border-radius:8px;
+      overflow:hidden;
     }
   </style>
 </head>
 <body>
 
+  <!-- =====  Hero  ===== -->
   <section class="hero">
     <h1>Welcome to RD Fuller Support</h1>
     <p>
-      This portal helps you verify your account, check balances, and make payments after hours
-      or when our representatives are unavailable. Click the button below to chat with our
-      support agent.
+      Verify your account, review balances, or make a payment anytime. Click
+      the button below—or the chat icon in the corner—to start chatting with
+      our support agent.
     </p>
     <a href="#" id="open-chat" class="cta">Chat with Support</a>
   </section>
 
-  <!-- Conversational Messenger -->
-  <link rel="stylesheet"
-    href="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/themes/df-messenger-default.css">
+  <!-- =====  Dialogflow Messenger  ===== -->
   <script src="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/df-messenger.js"></script>
 
   <df-messenger
@@ -102,29 +105,18 @@
     agent-id="d3a7f66d-10e6-439e-b6b4-b966f2ec8e21"
     language-code="en"
     max-query-length="-1"
-    chat-title="RD Fuller Support"
-    style="--df-messenger-font-color: #111827;
-           --df-messenger-font-family: Poppins, sans-serif;
-           --df-messenger-chat-background: #ffffff;
-           --df-messenger-message-user-background: #dbeafe;
-           --df-messenger-message-bot-background: #f9fafb;">
+    chat-title="RD Fuller Support">
+      <!-- keep default bubble so users can also click it -->
+      <df-messenger-chat-bubble chat-title="Chat"></df-messenger-chat-bubble>
   </df-messenger>
 
   <script>
+    /* Open the chat when CTA button is clicked */
     window.addEventListener('dfMessengerLoaded', () => {
       const messenger = document.getElementById('dfMessenger');
-      const button = document.getElementById('open-chat');
-
-      // Open & show messenger on button click
-      button.addEventListener('click', e => {
+      document.getElementById('open-chat').addEventListener('click', e => {
         e.preventDefault();
-        messenger.style.display = 'block';
-        messenger.open();
-      });
-
-      // Hide messenger when user clicks the built-in close icon
-      messenger.addEventListener('dfMessengerClose', () => {
-        messenger.style.display = 'none';
+        messenger.open();   // programmatically open the widget
       });
     });
   </script>
