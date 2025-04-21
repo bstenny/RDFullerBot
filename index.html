@@ -4,75 +4,122 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>RD Fuller Support</title>
-  
-  <!-- Optional: Google Font for nicer text -->
+
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet"/>
+
+  <!-- Dialogflow Messenger theme -->
+  <link rel="stylesheet"
+        href="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/themes/df-messenger-default.css"/>
 
   <style>
+    /* === Base reset & typography === */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: 'Poppins', sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f3f4f6;
       color: #1f2937;
+      background: #eef2f6;
       line-height: 1.6;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      text-align: center;
+      min-height: 100vh;
       padding: 1rem;
     }
-    .message-container {
-      max-width: 600px;
+
+    /* === Card container === */
+    .card {
+      background: #ffffff;
+      max-width: 800px;
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      text-align: center;
     }
-    h1 {
+
+    /* === Header image === */
+    .card__image {
+      width: 100%;
+      max-height: 200px;
+      object-fit: contain;
+      background: #f3f4f6;
+      padding: 2rem;
+    }
+
+    /* === Content area === */
+    .card__content {
+      padding: 2rem;
+    }
+    .card__content h1 {
       font-size: 2.5rem;
+      font-weight: 600;
       margin-bottom: 1rem;
     }
-    p {
+    .card__content p {
       font-size: 1.125rem;
       color: #4b5563;
+      margin-bottom: 2rem;
+    }
+
+    /* === Responsive adjustments === */
+    @media (max-width: 600px) {
+      .card__content h1 { font-size: 2rem; }
+      .card__content p  { font-size: 1rem; }
+    }
+
+    /* === Messenger window styling === */
+    df-messenger {
+      --df-messenger-font-family: 'Poppins', sans-serif;
+      --df-messenger-font-color: #1f2937;
+      --df-messenger-chat-background: #ffffff;
+      --df-messenger-message-user-background: #dbeafe;
+      --df-messenger-message-bot-background: #f9fafb;
+      position: fixed;
+      bottom: 16px;
+      right: 16px;
+      width: 340px;
+      height: 500px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+      border-radius: 8px;
+      z-index: 999;
     }
   </style>
 </head>
 <body>
-  <div class="message-container">
-    <h1>Welcome to RD Fuller Support</h1>
-    <p>
-      This chat widget connects you to our RD Fuller Support Bot.  
-      You can verify your account, check balances, and make payments at any time.  
-      Click the chat bubble in the bottom right corner to get started.
-    </p>
+
+  <div class="card">
+    <!-- RD Fuller Logo / Banner -->
+    <img
+      src="https://www.rentmanager.com/wp-content/uploads/2022/12/RD-Fuller-Company-WebVersion.png"
+      alt="RD Fuller Logo"
+      class="card__image"
+    />
+
+    <!-- Intro Message -->
+    <div class="card__content">
+      <h1>Welcome to RD Fuller Support</h1>
+      <p>
+        Use this chat to verify your account, review balances, and make payments any time — even after hours.  
+        Simply click the chat bubble in the corner to get started with our online support agent.
+      </p>
+    </div>
   </div>
 
-  <!-- Google Conversational Messenger snippet -->
-  <link rel="stylesheet"
-        href="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/themes/df-messenger-default.css">
+  <!-- Dialogflow Conversational Messenger Snippet -->
   <script src="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/df-messenger.js"></script>
 
   <df-messenger
     project-id="rd-fuller-agent"
     agent-id="d3a7f66d-10e6-439e-b6b4-b966f2ec8e21"
     language-code="en"
-    max-query-length="-1">
+    max-query-length="-1"
+    chat-title="RD Fuller Support"
+  >
     <df-messenger-chat-bubble chat-title="RD Fuller Bot"></df-messenger-chat-bubble>
   </df-messenger>
 
-  <style>
-    df-messenger {
-      z-index: 999;
-      position: fixed;
-      bottom: 16px;
-      right: 16px;
-      --df-messenger-font-color: #000;
-      --df-messenger-font-family: Google Sans;
-      --df-messenger-chat-background: #f3f6fc;
-      --df-messenger-message-user-background: #d3e3fd;
-      --df-messenger-message-bot-background: #fff;
-    }
-  </style>
 </body>
 </html>
