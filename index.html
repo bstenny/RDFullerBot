@@ -1,24 +1,125 @@
-<link rel="stylesheet" href="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/themes/df-messenger-default.css">
-<script src="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/df-messenger.js"></script>
-<df-messenger
-  project-id="rd-fuller-agent"
-  agent-id="d3a7f66d-10e6-439e-b6b4-b966f2ec8e21"
-  language-code="en"
-  max-query-length="-1">
-  <df-messenger-chat-bubble
-    chat-title="RD Fuller Bot">
-  </df-messenger-chat-bubble>
-</df-messenger>
-<style>
-  df-messenger {
-    z-index: 999;
-    position: fixed;
-    --df-messenger-font-color: #000;
-    --df-messenger-font-family: Google Sans;
-    --df-messenger-chat-background: #f3f6fc;
-    --df-messenger-message-user-background: #d3e3fd;
-    --df-messenger-message-bot-background: #fff;
-    bottom: 16px;
-    right: 16px;
-  }
-</style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RD Fuller Support</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
+
+  <style>
+    /* Global resets */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: #1f2937;
+      background-color: #f3f4f6;
+      line-height: 1.6;
+    }
+
+    /* Hero section */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      min-height: 100vh;
+      padding: 2rem;
+    }
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: #111827;
+    }
+    .hero p {
+      font-size: 1.25rem;
+      max-width: 600px;
+      margin-bottom: 2rem;
+      color: #4b5563;
+    }
+    .cta {
+      display: inline-block;
+      font-weight: 600;
+      font-size: 1rem;
+      color: #ffffff;
+      background-color: #3b82f6;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+    .cta:hover {
+      background-color: #2563eb;
+    }
+
+    /* Responsive text */
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2.25rem; }
+      .hero p  { font-size: 1rem; }
+    }
+
+    /* Override df-messenger bubble */
+    df-messenger::part(chat-bubble) {
+      display: none !important;
+    }
+  </style>
+</head>
+<body>
+
+  <section class="hero">
+    <h1>Welcome to RD Fuller Support</h1>
+    <p>
+      This portal helps you verify your account, check balances, and make payments after hours
+      or when our representatives are unavailable. Click the chat button below to get started
+      with our online agent.
+    </p>
+    <a href="#" id="open-chat" class="cta">Chat with Support</a>
+  </section>
+
+  <!-- Dialogflow CX Conversational Messenger -->
+  <link rel="stylesheet"
+    href="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/themes/df-messenger-default.css">
+  <script src="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/df-messenger.js"></script>
+
+  <df-messenger
+    project-id="rd-fuller-agent"
+    agent-id="d3a7f66d-10e6-439e-b6b4-b966f2ec8e21"
+    language-code="en"
+    max-query-length="-1"
+    chat-title="RD Fuller Support"
+    style="--df-messenger-font-color: #111827;
+           --df-messenger-font-family: Poppins, sans-serif;
+           --df-messenger-chat-background: #ffffff;
+           --df-messenger-message-user-background: #dbeafe;
+           --df-messenger-message-bot-background: #f9fafb;">
+  </df-messenger>
+
+  <style>
+    /* Position the widget bottom-right */
+    df-messenger {
+      position: fixed !important;
+      bottom: 16px;
+      right: 16px;
+      width: 350px;
+      height: 500px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+  </style>
+
+  <script>
+    // Wait for the messenger to initialize then open on CTA click
+    window.addEventListener('dfMessengerLoaded', () => {
+      const messenger = document.querySelector('df-messenger');
+      document.getElementById('open-chat').addEventListener('click', e => {
+        e.preventDefault();
+        messenger.open();
+      });
+    });
+  </script>
+</body>
+</html>
